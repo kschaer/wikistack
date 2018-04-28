@@ -1,7 +1,15 @@
 const morgan = require(`morgan`);
 const express = require(`express`);
 const bodyParser = require(`body-parser`);
+const path = require('path');
+
+
 const layout = require('./views/layout');
+//routers
+const wikiRouter = require('./routes/wiki');
+const userRouter = require('./routes/user');
+
+
 const app = express();
 const PORT = 8888;
 
@@ -13,13 +21,19 @@ const {db, Page, User} = require('./models');
 
 
 app.use(morgan(`dev`));
-app.use(express.static(__dirname + "./public"));
+// app.use(express.static(__dirname + "./public"));
+app.use(express.static(path.join(__dirname, './public')));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use('/views', layout);
 
-app.get('/', async (req, res) => {
-     await res.send(layout(''));
-    console.log(`hello world`);
+//use the routers
+app.use('/wiki', wikiRouter);
+app.use('/user', userRouter);
+
+app.get('/', (req, res) => {
+    res.send(layout(''));
+    res.redirect('/wiki');
+    console.log(`page is alive!`);
 
 });
 
@@ -41,8 +55,8 @@ const init = async () =>{
         console.log('listening');
     });
     console.log('initializing!')
-    db.sync({force: true});
-    console.log('DROP TABLE')
+    //db.sync({force: true});
+    //console.log('DROP TABLE')
 }
 
 

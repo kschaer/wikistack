@@ -5,7 +5,7 @@ module.exports = (content) => html`<!DOCTYPE html>
     <head>
       <title>WikiStack</title>
       <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
-      <link href="/stylesheets/style.css" rel="stylesheet">
+      <link type = 'text/html' href="/public/stylesheets/style.css" rel="stylesheet">
     </head>
     <body>
       <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
@@ -23,7 +23,7 @@ module.exports = (content) => html`<!DOCTYPE html>
             <ul class="nav navbar-nav">
               <li><a href="/wiki/">index</a></li>
               <li><a href="/wiki/add">write</a></li>
-              <li><a href="/users">users</a></li>
+              <li><a href="/user">users</a></li>
             </ul>
           </div>
         </div>
